@@ -49,10 +49,15 @@ TWO modes of coming into this file:
             $member[] = $_GET['phone'];
             $member[] = $_GET['email'];
 
-            $member_file = new SplFileObject('data/members.csv', 'a');
-            $member_file->fputcsv($member);
-            $member_file = null;
+            //open the file in truncate/write mode
+            $member_file = new SplFileObject('data/members.csv', 'w');
 
+            //write the data to file
+            for($i=0;$i<count($members);$i++){
+                $member_file->fputcsv($members[$i]);
+            }
+            //Go back to List
+            header("Location: members.php");
 
         }elseif(isset($_GET['id'])){
             //find that member
